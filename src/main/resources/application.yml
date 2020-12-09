@@ -1,0 +1,40 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: spring-dubbo-gateway
+
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: xxl-job-provider
+          uri: lb://xxl-job-provider
+#          filters:
+#            - AddRequestHeader=X-Request-Foo, Bar
+          predicates:
+            - Path=/xxl/**
+#            - Method=GET,POST
+          filters:
+            - StripPrefix=1
+          order: 5
+#        - id: static
+#          uri: lb://xxl-job-provider
+#          predicates:
+#            - Path=/**
+#          order: 6000
+
+#        - id: second_route
+#          uri: https://www.jd.com/
+#          filters:
+#            - AddRequestHeader=X-Request-Foo, Bar
+#          predicates:
+#            - Path=/second/**
+    #service-consumer
+    nacos:
+      discovery:
+        server-addr: 172.17.1.23:8848 #注册中心地址
