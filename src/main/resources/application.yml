@@ -37,4 +37,4 @@ spring:
     #service-consumer
     nacos:
       discovery:
-        server-addr: 172.17.1.23:8848 #注册中心地址
+        server-addr: 127.0.0.1:8848 #注册中心地址
